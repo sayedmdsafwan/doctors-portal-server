@@ -165,7 +165,7 @@ async function run() {
 run().catch(console.dir);
 
 app.get("/", (req, res) => {
-    res.send("Hello World!");
+    res.send("Doctors-portal is working perfectly!!!");
 });
 
 app.listen(port, () => {
