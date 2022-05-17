@@ -76,7 +76,7 @@ async function run() {
         });
 
         // delete a user | only admin can do this
-        app.delete("/user/:email", async (req, res) => {
+        app.delete("/user/:email", verifyJWT, verifyAdmin, async (req, res) => {
             const email = req.params.email;
             const filter = { email: email };
             const result = await userCollection.deleteOne(filter);
