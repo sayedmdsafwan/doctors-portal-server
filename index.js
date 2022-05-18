@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const port = process.env.PORT || 4000;
 const jwt = require("jsonwebtoken");
 
@@ -160,6 +160,13 @@ async function run() {
             const query = { patient: patient };
             const bookings = await bookingCollection.find(query).toArray();
             res.send(bookings);
+        });
+
+        app.get("/booking/:id", verifyJWT, async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const result = await bookingCollection.findOne(query);
+            res.send(result);
         });
 
         // booking data
